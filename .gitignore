@@ -1,0 +1,13 @@
+other/
+catboost_info/
+logs/
+
+
+#macos hidden file
+.DS_Store
+
+
+__pycache__/
+*.pyc
+*.pyo
+

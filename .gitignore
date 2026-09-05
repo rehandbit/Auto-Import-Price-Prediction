@@ -1,7 +1,7 @@
 other/
 catboost_info/
 logs/
-
+notebook/
 
 #macos hidden file
 .DS_Store

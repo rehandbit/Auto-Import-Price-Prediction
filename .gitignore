@@ -2,6 +2,7 @@ other/
 catboost_info/
 logs/
 notebook/
+1985_Auto_Imports_Database.egg-info/
 
 #macos hidden file
 .DS_Store

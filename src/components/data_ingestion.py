@@ -24,7 +24,7 @@ class DataIngestion:
             ]
 
             #load
-            df = pd.read_csv(self.raw_data_path, header = None, names = columns, na_values = ['?'])
+            df = pd.read_csv(self.raw_data_path, names = columns, na_values = "?")
             logger.info(f'data loaded - shape : {df.shape}')
 
             #train test split
@@ -37,7 +37,7 @@ class DataIngestion:
 
             logger.info('Train and Test split done')
             logger.info(f'Train shape : {train_df.shape}   Test shape : {test_df.shape} ')
-
+            # print(f'check missing : {train_df.isna().sum()}')
             return self.train_data_path, self.test_data_path
 
 

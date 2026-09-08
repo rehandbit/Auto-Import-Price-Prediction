@@ -22,13 +22,16 @@ class DataTransformation:
             train_df = pd.read_csv(train_path)
             test_df = pd.read_csv(test_path)
             logger.info('Train and Test data loaded')
+            # print(f'train-df : {test_df.isna().sum()}')
+
 
             # Clean ---------------------------------
 
-            numerix_fix = ['normalized_losses', 'peak_rpm', 'horsepower']
+            numerix_fix = ['normalized_losses', 'peak_rpm', 'horsepower', 'bore', 'stroke']
             for c in numerix_fix:
                 train_df[c] = pd.to_numeric(train_df[c], errors='coerce')
                 train_df[c] = train_df[c].fillna(train_df[c].median())
+
                 train_df[c] = train_df[c].astype('int64')
 
 
@@ -36,23 +39,32 @@ class DataTransformation:
                 test_df[c] = test_df[c].fillna(train_df[c].median())
                 test_df[c] = test_df[c].astype('int64')
 
+
             # num of cylinder (word to int)( two --> 2)
             word_to_int = {
                 "two" : 2, "three" : 3, "four" : 4 , "five" : 5 , "six" : 6, "eight" : 8, "twelve" : 12
                 }
             train_df['num_of_cylinders'] = train_df['num_of_cylinders'].map(word_to_int)
-            test_df['num_of_cylinders'] = train_df['num_of_cylinders'].map(word_to_int)
+            test_df['num_of_cylinders'] = test_df['num_of_cylinders'].map(word_to_int)
 
             # num of door ---------------------------------
             door_map = {"two": 2, "four": 4}
             train_df["num_of_doors"] = train_df["num_of_doors"].map(door_map)
             test_df["num_of_doors"] = test_df["num_of_doors"].map(door_map)
 
+            # filling missing value
+            train_df["num_of_doors"] = train_df["num_of_doors"].fillna(train_df["num_of_doors"].median())
+            test_df["num_of_doors"] = test_df["num_of_doors"].fillna(test_df["num_of_doors"].median())
+
+
             #drop missing price ---------------------------------
             train_df = train_df.dropna(subset=['price']).reset_index(drop=True)
             test_df = test_df.dropna(subset=['price']).reset_index(drop=True)
+            # print(f'train-df : {test_df.isna().sum()}')
 
             logger.info('Cleaning Done -\/')
+            # print(f'train-df : {test_df.isna().sum()}')
+            
 
             # Feature ---------------------------------
             TARGET = 'price'
@@ -60,7 +72,7 @@ class DataTransformation:
             X_train =  train_df.drop(columns = [TARGET])
             y_train = train_df[TARGET]
             
-            X_test = train_df.drop(columns = [TARGET])
+            X_test = test_df.drop(columns = [TARGET])
             y_test = test_df[TARGET]
 
             numeric_feature = X_train.select_dtypes(include = [np.number]).columns.tolist()
@@ -87,8 +99,9 @@ class DataTransformation:
             X_train_final = np.hstack([X_train_scaled, X_train_ohe])
             X_test_final = np.hstack([X_test_scaled, X_test_ohe])
             logger.info('COmbining done')
-            logger.info(f'Final train shape : {X_train_final}')
-            logger.info(f'Final test shape : {X_test_final}')
+            logger.info(f'Final train shape : {X_train_final.shape}')
+            logger.info(f'Final test shape : {X_test_final.shape}')
+            # print(f'X_train checking : {np.isnan(X_train_final).sum()}')
 
             # Saving Scaler and one hot encoding
             save_object(self.scaler_path, scaler)

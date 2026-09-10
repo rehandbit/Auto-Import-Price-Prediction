@@ -9,7 +9,7 @@ from src.exception import CustomException
 class TrainingPipeline:
     def start_training(self):
         try:
-            logger.info('Training Pipeline started -\/')
+            logger.info('Training Pipeline started -')
             ingestion = DataIngestion()
             train_path, test_path = ingestion.initiate_data_ingestion()
 

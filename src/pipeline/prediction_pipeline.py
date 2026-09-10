@@ -14,7 +14,7 @@ class PredictionPipeline:
 
     def predict(self, data):
         try:
-            logger.info('Prediction has started -\/')
+            logger.info('Prediction has started -')
 
             #load 
             model  =load_object(self.model_path)

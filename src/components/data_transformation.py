@@ -17,7 +17,7 @@ class DataTransformation:
 
     def initiate_data_transformation(self,train_path, test_path):
         try:
-            logger.info('Data Transformationo Started -\/')
+            logger.info('Data Transformationo Started -')
             #Load ---------------------------------
             train_df    = pd.read_csv(train_path)
             test_df     = pd.read_csv(test_path)
@@ -62,7 +62,7 @@ class DataTransformation:
             test_df  = test_df.dropna(subset=['price']).reset_index(drop=True)
             # print(f'train-df : {test_df.isna().sum()}')
 
-            logger.info('Cleaning Done -\/')
+            logger.info('Cleaning Done -')
             # print(f'train-df : {test_df.isna().sum()}')
             
 
@@ -107,7 +107,7 @@ class DataTransformation:
             save_object(self.scaler_path, scaler)
             save_object(self.ohe_path,    ohe)
 
-            logger.info('Scaler and OHE Saved -\/')
+            logger.info('Scaler and OHE Saved -')
 
             return X_train_final, X_test_final, y_train, y_test
 

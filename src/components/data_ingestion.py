@@ -13,7 +13,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         try:
             
-            logger.info('Data Ingestion started -\/')
+            logger.info('Data Ingestion started ')
 
             #adding column since this data does not have header
             columns = [

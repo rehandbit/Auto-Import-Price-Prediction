@@ -52,7 +52,7 @@ class ModelTrainer:
 
     def inititate_model_trainer(self, X_train, X_test, y_train, y_test):
         try:
-            logger.info('model training started -\/')
+            logger.info('model training started -')
             logger.info(f'X_train NaN: {np.isnan(X_train).sum()}')
             logger.info(f'X_test NaN: {np.isnan(X_test).sum()}')
 

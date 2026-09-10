@@ -19,8 +19,8 @@ class DataTransformation:
         try:
             logger.info('Data Transformationo Started -\/')
             #Load ---------------------------------
-            train_df = pd.read_csv(train_path)
-            test_df = pd.read_csv(test_path)
+            train_df    = pd.read_csv(train_path)
+            test_df     = pd.read_csv(test_path)
             logger.info('Train and Test data loaded')
             # print(f'train-df : {test_df.isna().sum()}')
 
@@ -45,21 +45,21 @@ class DataTransformation:
                 "two" : 2, "three" : 3, "four" : 4 , "five" : 5 , "six" : 6, "eight" : 8, "twelve" : 12
                 }
             train_df['num_of_cylinders'] = train_df['num_of_cylinders'].map(word_to_int)
-            test_df['num_of_cylinders'] = test_df['num_of_cylinders'].map(word_to_int)
+            test_df['num_of_cylinders']  = test_df['num_of_cylinders'].map(word_to_int)
 
             # num of door ---------------------------------
             door_map = {"two": 2, "four": 4}
             train_df["num_of_doors"] = train_df["num_of_doors"].map(door_map)
-            test_df["num_of_doors"] = test_df["num_of_doors"].map(door_map)
+            test_df["num_of_doors"]  = test_df["num_of_doors"].map(door_map)
 
             # filling missing value
             train_df["num_of_doors"] = train_df["num_of_doors"].fillna(train_df["num_of_doors"].median())
-            test_df["num_of_doors"] = test_df["num_of_doors"].fillna(test_df["num_of_doors"].median())
+            test_df["num_of_doors"]  = test_df["num_of_doors"].fillna(test_df["num_of_doors"].median())
 
 
             #drop missing price ---------------------------------
             train_df = train_df.dropna(subset=['price']).reset_index(drop=True)
-            test_df = test_df.dropna(subset=['price']).reset_index(drop=True)
+            test_df  = test_df.dropna(subset=['price']).reset_index(drop=True)
             # print(f'train-df : {test_df.isna().sum()}')
 
             logger.info('Cleaning Done -\/')
@@ -82,22 +82,22 @@ class DataTransformation:
             logger.info(f'Categorical Feature : {len(categorical_feature)}')
 
             # Scaler ---------------------------------
-            scaler = StandardScaler()
-            X_train_scaled = scaler.fit_transform(X_train[numeric_feature])
-            X_test_scaled = scaler.transform(X_test[numeric_feature])
+            scaler          = StandardScaler()
+            X_train_scaled  = scaler.fit_transform(X_train[numeric_feature])
+            X_test_scaled   = scaler.transform(X_test[numeric_feature])
 
             logger.info('Scaling done')
 
             # OneHotEncoding ---------------------------------
-            ohe = OneHotEncoder(handle_unknown= 'ignore', sparse_output=False)
+            ohe         = OneHotEncoder(handle_unknown= 'ignore', sparse_output=False)
             X_train_ohe = ohe.fit_transform(X_train[categorical_feature])
-            X_test_ohe = ohe.transform(X_test[categorical_feature])
+            X_test_ohe  = ohe.transform(X_test[categorical_feature])
 
             logger.info('One Hot Encoding done')
 
             # COmbine ---------------------------------
             X_train_final = np.hstack([X_train_scaled, X_train_ohe])
-            X_test_final = np.hstack([X_test_scaled, X_test_ohe])
+            X_test_final  = np.hstack([X_test_scaled, X_test_ohe])
             logger.info('COmbining done')
             logger.info(f'Final train shape : {X_train_final.shape}')
             logger.info(f'Final test shape : {X_test_final.shape}')
@@ -125,6 +125,6 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = transformation.initiate_data_transformation(train_path, test_path)
 
     print('X_train shape : ', X_train.shape)
-    print('X_test shape : ', X_test.shape)
+    print('X_test shape : ',  X_test.shape)
     print('y_train shape : ', y_train.shape)
-    print('y_test shape : ', y_test.shape)
+    print('y_test shape : ',  y_test.shape)

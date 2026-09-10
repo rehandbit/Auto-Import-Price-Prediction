@@ -7,9 +7,9 @@ from src.utils import load_object
 
 class PredictionPipeline:
     def __init__(self):
-        self.model_path = 'artifacts/model/model.pkl'
+        self.model_path  = 'artifacts/model/model.pkl'
         self.scaler_path = 'artifacts/preprocessor/scaler.pkl'
-        self.ohe_path = 'artifacts/preprocessor/ohe.pkl'
+        self.ohe_path    = 'artifacts/preprocessor/ohe.pkl'
 
 
     def predict(self, data):

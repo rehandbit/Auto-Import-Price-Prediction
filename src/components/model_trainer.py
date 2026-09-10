@@ -30,15 +30,15 @@ class ModelTrainer:
                 
                 y_test_pred = model.predict(X_test)
 
-                r2 = r2_score(y_test, y_test_pred)
+                r2   = r2_score(y_test, y_test_pred)
                 rmse = np.sqrt(mean_squared_error(y_test, y_test_pred))
-                mae = mean_absolute_error(y_test, y_test_pred)
+                mae  = mean_absolute_error(y_test, y_test_pred)
 ###
                 result[name] = {
                     "model" : model,
-                    "r2" : r2,
-                    'rmse' :rmse,
-                    'mae' :mae,
+                    "r2"    : r2,
+                    'rmse'  :rmse,
+                    'mae'   :mae,
                 }
 
                 logger.info(f'{name:20s} , r2 = {r2*100:.3f}, rmse = {rmse:.3f}, mae = {mae:.3f}')
@@ -61,21 +61,21 @@ class ModelTrainer:
 
             models = {
                 'Linear Regression' : LinearRegression(),
-                'Ridge' : Ridge(alpha=10.0),
-                'Lasso' : Lasso(alpha=10.0, max_iter=100000),
-                'Decision Tree': DecisionTreeRegressor(random_state=42),
-                'KNN': KNeighborsRegressor(),
-                'Random Forest': RandomForestRegressor(n_estimators=300 , random_state=42),
-                'ADA Boost': AdaBoostRegressor(random_state=42),
-                'Cat Boost': CatBoostRegressor(verbose=False, random_state=42),
-                'XGBoost': XGBRegressor(learning_rate=0.05, max_depth=3, n_estimators=300 , random_state=42),
+                'Ridge'             : Ridge(alpha=10.0),
+                'Lasso'             : Lasso(alpha=10.0, max_iter=100000),
+                'Decision Tree'     : DecisionTreeRegressor(random_state=42),
+                'KNN'               : KNeighborsRegressor(),
+                'Random Forest'     : RandomForestRegressor(n_estimators=300 , random_state=42),
+                'ADA Boost'         : AdaBoostRegressor(random_state=42),
+                'Cat Boost'         : CatBoostRegressor(verbose=False, random_state=42),
+                'XGBoost'           : XGBRegressor(learning_rate=0.05, max_depth=3, n_estimators=300 , random_state=42),
             }
             results = self.evaluate_model(X_train, X_test, y_train, y_test, models)
 
             # Best model
-            best_name = max(results, key=lambda x: results[x]['r2'])
-            best_r2 = results[best_name]['r2']
-            best_model = results[best_name]['model']
+            best_name   = max(results, key=lambda x: results[x]['r2'])
+            best_r2     = results[best_name]['r2']
+            best_model  = results[best_name]['model']
 
             print(f'best model : {best_model}')
             print(f'Best R2 : {best_r2*100:.3f}')

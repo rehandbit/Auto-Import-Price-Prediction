@@ -7,7 +7,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-@app.route('/predict', method = ['POST'])
+@app.route('/predict', methods = ['POST'])
 def predict():
     data = CustomData(
         symboling         = int(request.form.get("symboling")),
@@ -37,9 +37,9 @@ def predict():
         highway_mpg       = int(request.form.get("highway_mpg")),
     )
 
-    df = data.get_data_as_dataframe()
-    pipeline = PredictionPipeline()
-    price = pipeline.predict(df)
+    df          = data.get_data_as_dataframe()
+    pipeline    = PredictionPipeline()
+    price       = pipeline.predict(df)
 
     return render_template('index.html', prediction = f'Predicted Price: $ {price[0]:.2f}')
 

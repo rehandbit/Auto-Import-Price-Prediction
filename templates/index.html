@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Car Price Predictor</title>
+    </head>
+    <body>
+    <h1>Car Price Predictor</h1>
+    <form action="/predict" method="post">
+        <label>Symboling:</label>
+        <input type="number" name="symboling"><br>
+        <label>Normalized Losses:</label>
+        <input type="number" name="normalized_losses"><br>
+        <label>Make:</label>
+        <input type="text" name="make"><br>
+        <label>Fuel Type:</label>
+        <input type="text" name="fuel_type"><br>
+        <label>Aspiration:</label>
+        <input type="text" name="aspiration"><br>
+        <label>Num of Doors:</label>
+        <input type="number" name="num_of_doors"><br>
+        <label>Body Style:</label>
+        <input type="text" name="body_style"><br>
+        <label>Drive Wheels:</label>
+        <input type="text" name="drive_wheels"><br>
+        <label>Engine Location:</label>
+        <input type="text" name="engine_location"><br>
+        <label>Wheel Base:</label>
+        <input type="number" step="0.1" name="wheel_base"><br>
+        <label>Length:</label>
+        <input type="number" step="0.1" name="length"><br>
+        <label>Width:</label>
+        <input type="number" step="0.1" name="width"><br>
+        <label>Height:</label>
+        <input type="number" step="0.1" name="height"><br>
+        <label>Curb Weight:</label>
+        <input type="number" name="curb_weight"><br>
+        <label>Engine Type:</label>
+        <input type="text" name="engine_type"><br>
+        <label>Num of Cylinders:</label>
+        <input type="number" name="num_of_cylinders"><br>
+        <label>Engine Size:</label>
+        <input type="number" name="engine_size"><br>
+        <label>Fuel System:</label>
+        <input type="text" name="fuel_system"><br>
+        <label>Bore:</label>
+        <input type="number" step="0.01" name="bore"><br>
+        <label>Stroke:</label>
+        <input type="number" step="0.01" name="stroke"><br>
+        <label>Compression Ratio:</label>
+        <input type="number" step="0.1" name="compression_ratio"><br>
+        <label>Horsepower:</label>
+        <input type="number" name="horsepower"><br>
+        <label>Peak RPM:</label>
+        <input type="number" name="peak_rpm"><br>
+        <label>City MPG:</label>
+        <input type="number" name="city_mpg"><br>
+        <label>Highway MPG:</label>
+        <input type="number" name="highway_mpg"><br>
+        <br>
+        <input type="submit" value="Predict Price">
+    </form>
+
+    {% if prediction %}
+        <h2>{{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>

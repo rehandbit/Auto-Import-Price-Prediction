@@ -41,7 +41,7 @@ class ModelTrainer:
                     'mae' :mae,
                 }
 
-                logger.info(f'{name:25s} , r2 = {r2}, rmse = {rmse}, mae = {mae:2f}')
+                logger.info(f'{name:20s} , r2 = {r2*100:.3f}, rmse = {rmse:.3f}, mae = {mae:.3f}')
             return result
 
 
@@ -78,9 +78,9 @@ class ModelTrainer:
             best_model = results[best_name]['model']
 
             print(f'best model : {best_model}')
-            print(f'Best R2 : {best_r2}')
+            print(f'Best R2 : {best_r2*100:.3f}')
 
-            logger.info(f'Best Model : {best_name} -> R2 : {best_r2}')
+            logger.info(f'Best Model : {best_name} -> R2 : {best_r2*100:.3f}')
 
             save_object(self.model_path, best_model)
             logger.info(f'best Model save at : {self.model_path}')
@@ -105,4 +105,4 @@ if __name__ == '__main__':
     best_name, best_r2 = trainer.inititate_model_trainer(X_train, X_test, y_train, y_test)
     
     print(f'\n -- Final best Model : {best_name}')
-    print(f'\n -- Final best R2    : {best_r2}')
+    print(f'\n -- Final best R2    : {best_r2*100:.3f}')
